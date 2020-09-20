@@ -3,19 +3,18 @@ package elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Input{
+public class Input extends BaseElemnt {
 
-    WebDriver driver;
-    String label;
+
     String locator = "//span[text()='%s']/ancestor::div[contains(@class,'uiInput')]//input";
 
     public Input(WebDriver driver, String label) {
-        this.driver = driver;
-        this.label = label;
+        super(driver, label);
+
     }
 
     public void write(String text) {
+        driver.findElement(By.xpath(String.format(locator, label))).clear();
         driver.findElement(By.xpath(String.format(locator, label))).sendKeys(text);
     }
 }
-

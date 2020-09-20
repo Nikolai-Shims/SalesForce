@@ -4,10 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.AccountsPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.NewAccountModal;
+import pages.*;
+import pages.modals.ModalWindowDelete;
+import pages.modals.ModalWindowEdit;
+import pages.modals.ModalWindowNewAccount;
+import pages.modals.ModalWindowNewContact;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,18 +19,26 @@ public abstract class BaseTest {
 
     WebDriver driver;
     LoginPage loginPage;
-    NewAccountModal newAccountModal;
+    ModalWindowNewAccount modalWindowNewAccount;
     HomePage homePage;
     AccountsPage accountsPage;
+    ModalWindowDelete modalWindowDelete;
+    ContactPage contactPage;
+    ModalWindowNewContact modalWindowNewContact;
+    ModalWindowEdit modalWindowEdit;
 
     @BeforeMethod
     public void before() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
-        newAccountModal = new NewAccountModal(driver);
+        modalWindowEdit = new ModalWindowEdit(driver);
+        modalWindowNewAccount = new ModalWindowNewAccount(driver);
         homePage = new HomePage(driver);
+        modalWindowNewContact = new ModalWindowNewContact(driver);
+        contactPage = new ContactPage(driver);
         accountsPage = new AccountsPage(driver);
+        modalWindowDelete = new ModalWindowDelete(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
