@@ -33,6 +33,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         System.out.println(String.format("======================================== SKIPPING TEST %s ========================================", iTestResult.getName()));
+        takeScreenshot(iTestResult);
     }
 
     @Override
@@ -63,9 +64,7 @@ public class TestListener implements ITestListener {
             return null;
         } catch (IllegalStateException ex) {
             return null;
-        }catch (NullPointerException re){
-            return null;
-
-        }    }
+        }
+    }
 
 }

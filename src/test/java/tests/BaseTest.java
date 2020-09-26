@@ -2,6 +2,7 @@ package tests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
@@ -28,7 +29,7 @@ public abstract class BaseTest {
     ModalWindowEdit modalWindowEdit;
 
     @BeforeMethod
-    public void before() {
+    public void before(ITestContext context) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         driver = new ChromeDriver();
         loginPage = new LoginPage(driver);
@@ -41,6 +42,7 @@ public abstract class BaseTest {
         modalWindowDelete = new ModalWindowDelete(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+    context.setAttribute("driver",driver);
     }
 
     @AfterMethod(alwaysRun = true)
